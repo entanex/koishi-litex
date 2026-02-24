@@ -1,15 +1,13 @@
 plugins:
-  group:
-    http: {}
-    proxy-agent: {}
-    $label: basic
   group:server:
-    $collapsed: true
     server:
       port: 5140
       maxPort: 5149
     server-satori: {}
-  group:
+  group:basic:
+    http: {}
+    proxy-agent: {}
+  group:isolate:
     $label: isolate-group
     ~adapter-discord:
       token: ${{ env.DISCORD_TOKEN }}
