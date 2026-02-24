@@ -1,0 +1,60 @@
+plugins:
+  group:
+    http: {}
+    proxy-agent: {}
+    $label: basic
+  group:server:
+    $collapsed: true
+    server:
+      port: 5140
+      maxPort: 5149
+    server-satori: {}
+  group:
+    $label: isolate-group
+    ~adapter-discord:
+      token: ${{ env.DISCORD_TOKEN }}
+      slash: false
+      intents:
+        - GUILDS
+        - GUILD_MEMBERS
+        - GUILD_BANS
+        - GUILD_EMOJIS_AND_STICKERS
+        - GUILD_INTEGRATIONS
+        - GUILD_INVITES
+        - GUILD_MESSAGES
+        - GUILD_MESSAGE_REACTIONS
+        - GUILD_MESSAGE_TYPING
+        - DIRECT_MESSAGES
+        - DIRECT_MESSAGE_REACTIONS
+        - DIRECT_MESSAGE_TYPING
+        - MESSAGE_CONTENT
+        - GUILD_SCHEDULED_EVENTS
+    ~adapter-telegram:
+      protocol: polling
+      token: ${{ env.TELEGRAM_TOKEN }}
+      slash: false
+    isolate:
+      proxyAgent: ${{ env.PROXY }}
+  group:adapter:
+    adapter-qq:
+      id: ${{ env.QQ_ID }}
+      secret: ${{ env.QQ_SECRET }}
+      token: ${{ env.QQ_TOKEN }}
+      type: private
+      intents:
+        - GUILDS
+        - GUILD_MEMBERS
+        - GUILD_MESSAGES
+        - GUILD_MESSAGE_REACTIONS
+        - DIRECT_MESSAGES
+        - USER_MESSAGE
+    adapter-satori:
+      endpoint: http://127.0.0.1:5600
+    ~adapter-milky:
+      endpoint: http://127.0.0.1:3010
+    ~adapter-onebot:
+      path: /onebot/v11/ws
+  group:develop:
+    $if: env.NODE_ENV === 'development'
+    hmr:vazquu:
+      root: .
