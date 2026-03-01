@@ -88,7 +88,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Trigger docker build
         env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
           GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
         if: ${{ env.DOCKER_USERNAME != null }}
         run: gh workflow run Docker
